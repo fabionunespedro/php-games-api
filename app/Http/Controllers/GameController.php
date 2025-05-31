@@ -10,7 +10,6 @@ class GameController extends Controller
     public function index() {
         return Game::all();
     }
-
     public function store(Request $request){
         $request->validate([
             'name' => 'required|string',
