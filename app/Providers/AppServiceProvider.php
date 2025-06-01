@@ -3,9 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Managers\GameManager;
-use App\Contracts\GameContract;
-
+use App\Repositories\GameRepositoryInterface;
+use App\Repositories\GameRepository;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(GameContract::class, GameManager::class);
+        $this->app->bind(GameRepositoryInterface::class, GameRepository::class);
     }
 
     /**
