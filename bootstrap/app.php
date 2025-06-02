@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'check.year' => \App\Http\Middleware\CheckGameYaer::class,
+            'auth.token' => \App\Http\Middleware\TokenAuthMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
