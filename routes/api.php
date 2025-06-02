@@ -24,16 +24,14 @@ Route::post('/login', function(Request $request) {
     ]);
 });
 
-Route::middleware('auth.token')->group(function () {
+
     Route::get('/games', [GameController::class, 'index']);
     Route::post('/games', [GameController::class, 'store']);
     Route::get('/games/{id}', [GameController::class, 'show']);
     Route::put('/games/{id}', [GameController::class, 'update']);
     Route::delete('/games/{id}', [GameController::class, 'destroy']);
-
     Route::get('/user', function (Request $request) {
         $token = $request->bearerToken();
         $user = User::where('api_token', $token)->first();
         return $user->only('id', 'name', 'email');
     });
-});
