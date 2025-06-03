@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Passport::tokensExpireIn(Carbon::now()->addMinutes(10));
-        Passport::refreshTokensExpireIn(now()->addMinutes(5));
+        Passport::refreshTokensExpireIn(now()->addMinutes(30));
         Passport::enablePasswordGrant();
     }
 }
