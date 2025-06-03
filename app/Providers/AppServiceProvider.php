@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\GameRepositoryInterface;
 use App\Repositories\GameRepository;
+use Carbon\Carbon;
 use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Passport::tokensExpireIn(Carbon::now()->addMinutes(1));
+        Passport::refreshTokensExpireIn(now()->addMinutes(5));
         Passport::enablePasswordGrant();
     }
 }
