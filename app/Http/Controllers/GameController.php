@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Services\GameService;
-
+use App\Http\Requests\StoreGameRequest;
+use App\Http\Requests\UpdateGameRequest;
 class GameController extends Controller
 {
     protected $service;
@@ -19,33 +19,31 @@ class GameController extends Controller
         return $this->service->getAll();
     }
 
-    public function store(Request $request)
+    public function store(StoreGameRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string',
-            'categoria' => 'required|string',
-            'ano' => 'required|digits:4|integer',
-        ]);
+        $data = $request->validated();
+        $game = $this->service->create($data);
 
-        return response()->json($this->service->create($validated), 201);
+        return response()->json($game, 201);
     }
 
     public function show($id)
     {
         $game = $this->service->findById($id);
-        return $game ?: response()->json(['message' => 'Jogo não encontrado'], 404);
+
+        return $game
+            ? response()->json($game)
+            : response()->json(['message' => 'Jogo não encontrado'], 404);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateGameRequest $request, $id)
     {
-        $validated = $request->validate([
-            'name' => 'sometimes|string',
-            'categoria' => 'sometimes|string',
-            'ano' => 'sometimes|digits:4|integer',
-        ]);
-
-        $updated = $this->service->update($id, $validated);
-        return $updated ?: response()->json(['message' => 'Jogo não encontrado'], 404);
+        $data = $request->validated();
+        $updated = $this->service->update($id, $data);
+        
+         return $updated
+            ? response()->json($updated)
+            : response()->json(['message' => 'Jogo não encontrado'], 404);
     }
 
     public function destroy($id)

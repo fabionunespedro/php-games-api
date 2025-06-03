@@ -2,13 +2,12 @@
 
 namespace App\Services;
 
-use App\Repositories\GameRepositoryInterface;
-
+use App\Repositories\GameRepository;
 class GameService
 {
     protected $repository;
 
-    public function __construct(GameRepositoryInterface $repository)
+    public function __construct(GameRepository $repository)
     {
         $this->repository = $repository;
     }
