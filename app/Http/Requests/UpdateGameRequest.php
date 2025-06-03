@@ -22,9 +22,9 @@ class UpdateGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'name' => 'sometimes|required|string',
-        'categoria' => 'sometimes|required|string',
-        'ano' => 'sometimes|required|integer',
-    ];
+            'name' => 'sometimes|required|string',
+            'categoria' => 'sometimes|required|string',
+            'ano' => 'sometimes|required|integer',
+        ];
     }
 }
