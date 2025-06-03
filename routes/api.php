@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:api')->group(function (){
     Route::get('/games', [GameController::class, 'index']);
     Route::post('/games', [GameController::class, 'store']);
     Route::get('/games/{id}', [GameController::class, 'show']);

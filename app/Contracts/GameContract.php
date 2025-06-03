@@ -1,7 +1,7 @@
 <?php
  namespace App\Contracts;
-
- interface GameContract{
+ interface GameContract
+ {
     public function getAll();
     public function findById(int $id);
     public function create(array $data);
